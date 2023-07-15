@@ -44,6 +44,32 @@ final class UnitHelper
 
     /**
      * @phpstan-param UnitConst::UNIT_* $unit
+     *
+     * @phpstan-return 'inches/h'|'mm/h'
+     */
+    public static function getPrecipitationUnit(string $unit): string
+    {
+        return match ($unit) {
+            UnitConst::UNIT_IMPERIAL => 'inches/h',
+            default                  => 'mm/h',
+        };
+    }
+
+    /**
+     * @phpstan-param UnitConst::UNIT_* $unit
+     *
+     * @phpstan-return 'min'|'s'
+     */
+    public static function getSunshineUnit(string $unit): string
+    {
+        return match ($unit) {
+            UnitConst::UNIT_IMPERIAL => 's',
+            default                  => 'min',
+        };
+    }
+
+    /**
+     * @phpstan-param UnitConst::UNIT_* $unit
      */
     public static function mapTemperature(float $temperature, string $from, string $unit): float
     {
@@ -192,6 +218,23 @@ final class UnitHelper
             UnitConst::UNIT_STANDARD => self::kmhToMs($speed),
             UnitConst::UNIT_IMPERIAL => self::kmhToMph($speed),
             default                  => $speed,
+        };
+    }
+
+    /**
+     * @phpstan-param UnitConst::UNIT_* $unit
+     */
+    public static function mapSunshine(int $sunshine, string $from, string $unit): int
+    {
+        return match ($from) {
+            UnitConst::SUNSHINE_S => match ($unit) {
+                UnitConst::UNIT_IMPERIAL => $sunshine,
+                default                  => $sunshine * 60,
+            },
+            default => match ($unit) {
+                UnitConst::UNIT_IMPERIAL => (int)round($sunshine / 60, 0),
+                default                  => $sunshine,
+            },
         };
     }
 

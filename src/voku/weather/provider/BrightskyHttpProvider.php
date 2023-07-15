@@ -101,6 +101,10 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed'], UnitConst::SPEED_KMH, $unit);
         } elseif (\array_key_exists('wind_speed_10', $weatherRawData)) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_10'], UnitConst::SPEED_KMH, $unit);
+        } elseif (\array_key_exists('wind_speed_30', $weatherRawData)) {
+            $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_30'], UnitConst::SPEED_KMH, $unit);
+        } elseif (\array_key_exists('wind_speed_60', $weatherRawData)) {
+            $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_60'], UnitConst::SPEED_KMH, $unit);
         } else {
             $windSpeed = null;
         }
@@ -109,6 +113,10 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             $windDirection = $weatherRawData['wind_direction'];
         } elseif (\array_key_exists('wind_direction_10', $weatherRawData)) {
             $windDirection = $weatherRawData['wind_direction_10'];
+        } elseif (\array_key_exists('wind_direction_30', $weatherRawData)) {
+            $windDirection = $weatherRawData['wind_direction_30'];
+        } elseif (\array_key_exists('wind_direction_60', $weatherRawData)) {
+            $windDirection = $weatherRawData['wind_direction_60'];
         } else {
             $windDirection = null;
         }
@@ -117,8 +125,24 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation'], UnitConst::PRECIPITATION_MM, $unit);
         } elseif (\array_key_exists('precipitation_10', $weatherRawData)) {
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_10'], UnitConst::PRECIPITATION_MM, $unit);
+        } elseif (\array_key_exists('precipitation_30', $weatherRawData)) {
+            $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_30'], UnitConst::PRECIPITATION_MM, $unit);
+        } elseif (\array_key_exists('precipitation_60', $weatherRawData)) {
+            $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_60'], UnitConst::PRECIPITATION_MM, $unit);
         } else {
             $precipitation = null;
+        }
+
+        if (\array_key_exists('sunshine', $weatherRawData)) {
+            $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine'], UnitConst::SUNSHINE_MIN, $unit);
+        } elseif (\array_key_exists('sunshine_10', $weatherRawData)) {
+            $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_10'], UnitConst::SUNSHINE_MIN, $unit);
+        } elseif (\array_key_exists('sunshine_30', $weatherRawData)) {
+            $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_30'], UnitConst::SUNSHINE_MIN, $unit);
+        } elseif (\array_key_exists('sunshine_60', $weatherRawData)) {
+            $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_60'], UnitConst::SUNSHINE_MIN, $unit);
+        } else {
+            $sunshine = null;
         }
 
         $cloudCover = $weatherRawData['cloud_cover'];
@@ -129,7 +153,11 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
 
         $temperatureUnit = UnitHelper::getTemperatureUnit($unit);
 
-        $speedUnit = UnitHelper::getSpeedUnit($unit);
+        $windSpeedUnit = UnitHelper::getSpeedUnit($unit);
+
+        $precipitationUnit = UnitHelper::getPrecipitationUnit($unit);
+
+        $sunshineUnit = UnitHelper::getSunshineUnit($unit);
 
         return new WeatherDto(
             $unit,
@@ -142,14 +170,17 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             $humidity,
             $pressure,
             $windSpeed,
-            $speedUnit,
+            $windSpeedUnit,
             $windDirection,
             $precipitation,
+            $precipitationUnit,
             $cloudCover,
             $utcDateTime,
             $type,
             $weatherCode,
-            $icon
+            $icon,
+            $sunshine,
+            $sunshineUnit
         );
     }
 

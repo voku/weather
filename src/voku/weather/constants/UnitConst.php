@@ -23,4 +23,7 @@ class UnitConst
 
     public const PRECIPITATION_MM = 'mm';
     public const PRECIPITAION_INCHES = 'inches';
+
+    public const SUNSHINE_MIN = 'min';
+    public const SUNSHINE_S = 's';
 }

@@ -26,12 +26,28 @@ final class WeatherDto
         public readonly float $temperature,
         public readonly string $temperatureUnit,
         public readonly ?float $dewPoint,
+        /**
+         * INFO: in %
+         */
         public readonly ?float $humidity,
+        /**
+         * INFO: in e.g. hPa
+         */
         public readonly ?float $pressure,
+        /**
+         * INFO: in e.g. km/h
+         */
         public readonly ?float $windSpeed,
-        public readonly string $speedUnit,
+        public readonly ?string $windSpeedUnit,
         public readonly ?float $windDirection,
+        /**
+         * INFO: in e.g. mm/h
+         */
         public readonly ?float $precipitation,
+        public readonly ?string $precipitationUnit,
+        /**
+         * INFO: in %
+         */
         public readonly ?float $cloudCover,
         public readonly ?\DateTimeInterface $utcDateTime,
         /**
@@ -47,13 +63,18 @@ final class WeatherDto
         /**
          * @var WeatherConst::ICON_*|null
          */
-        public readonly ?string $icon
+        public readonly ?string $icon,
+        /**
+         * INFO: in e.g. min
+         */
+        public readonly ?int $sunshine,
+        public readonly ?string $sunshineUnit
     ) {
     }
 
     public function getWindSpeedWithUnit(): string
     {
-        return $this->windSpeed . ' ' . $this->speedUnit;
+        return $this->windSpeed . ' ' . $this->windSpeedUnit;
     }
 
     public function getTemperatureWithUnit(): string
