@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.4.0 (2023-07-15)
+
+- "WeatherDto" -> add more units + "sunshine" info
+
 ### 0.3.0 (2023-07-15)
 
 - "WeatherDto" -> add speed / temperature units into the DTO
