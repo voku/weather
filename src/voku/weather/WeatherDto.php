@@ -74,4 +74,26 @@ final class WeatherDto
     {
         return UnitHelper::getSpeedUnit($this->unit);
     }
+
+    public static function createFromJson(string $json): self {
+        $data = json_decode($json, true, 512, \JSON_THROW_ON_ERROR);
+
+        if (is_array($data['sources'])) {
+            $sources = [];
+            foreach ($data['sources'] as $source) {
+                if (is_array($source)) {
+                    $sources[] = new WeatherSourceDto(...$source);
+                }
+            }
+            $data['sources'] = $sources;
+        }
+
+        if (is_array($data['utcDateTime'])) {
+            $utcDateTime = (new \DateTimeImmutable())->setTimezone(new \DateTimeZone('UTC'));
+            $utcDateTime = $utcDateTime->setTimestamp(strtotime($data['utcDateTime']['date']));
+            $data['utcDateTime'] = $utcDateTime;
+        }
+
+        return new WeatherDto(...$data);
+    }
 }
