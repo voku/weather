@@ -1,7 +1,7 @@
 [![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-[![Build Status](https://github.com/voku/weather/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/voku/weather/actions)
-[![codecov.io](http://codecov.io/github/voku/weather/coverage.svg?branch=master)](http://codecov.io/github/voku/weather?branch=master)
+[![Build Status](https://github.com/voku/weather/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/voku/weather/actions)
+[![codecov.io](http://codecov.io/github/voku/weather/coverage.svg?branch=main)](http://codecov.io/github/voku/weather?branch=main)
 
 # Weather Data Wrapper
 
