@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 defaults:
   run:
@@ -46,17 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[ "${{ matrix.php }}" == "7.4" ]]; then
-            composer require phpstan/phpstan --no-update
-          fi;
-
-          if [[ "${{ matrix.composer }}" == "lowest" ]]; then
-            composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable
-          fi;
-
-          if [[ "${{ matrix.composer }}" == "basic" ]]; then
-            composer update --prefer-dist --no-interaction
-          fi;
+          composer update --prefer-dist --no-interaction
 
           composer dump-autoload -o
 
