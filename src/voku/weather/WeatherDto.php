@@ -24,10 +24,12 @@ final class WeatherDto
         public readonly float $latitude,
         public readonly float $longitude,
         public readonly float $temperature,
+        public readonly string $temperatureUnit,
         public readonly ?float $dewPoint,
         public readonly ?float $humidity,
         public readonly ?float $pressure,
         public readonly ?float $windSpeed,
+        public readonly string $speedUnit,
         public readonly ?float $windDirection,
         public readonly ?float $precipitation,
         public readonly ?float $cloudCover,
@@ -51,28 +53,12 @@ final class WeatherDto
 
     public function getWindSpeedWithUnit(): string
     {
-        return $this->windSpeed . ' ' . $this->getSpeedUnit();
+        return $this->windSpeed . ' ' . $this->speedUnit;
     }
 
     public function getTemperatureWithUnit(): string
     {
-        return $this->temperature . ' ' . $this->getTemperatureUnit();
-    }
-
-    /**
-     * @phpstan-return '°F'|'K'|'°C'
-     */
-    public function getTemperatureUnit(): string
-    {
-        return UnitHelper::getTemperatureUnit($this->unit);
-    }
-
-    /**
-     * @phpstan-return 'km/h'|'mph'|'ms'
-     */
-    public function getSpeedUnit(): string
-    {
-        return UnitHelper::getSpeedUnit($this->unit);
+        return $this->temperature . ' ' . $this->temperatureUnit;
     }
 
     public static function createFromJson(string $json): self {

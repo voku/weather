@@ -127,16 +127,22 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
 
         $icon = $this->mapIcon($weatherRawData);
 
+        $temperatureUnit = UnitHelper::getTemperatureUnit($unit);
+
+        $speedUnit = UnitHelper::getSpeedUnit($unit);
+
         return new WeatherDto(
             $unit,
             $this->getSources(),
             $latitude,
             $longitude,
             $temperature,
+            $temperatureUnit,
             $dewPoint,
             $humidity,
             $pressure,
             $windSpeed,
+            $speedUnit,
             $windDirection,
             $precipitation,
             $cloudCover,
