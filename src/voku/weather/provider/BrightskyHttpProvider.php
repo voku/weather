@@ -45,6 +45,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
                         $latitude,
                         $longitude,
                         $weatherRawData,
+                        $rawData['sources'],
                         null,
                         $unit
                     )
@@ -55,6 +56,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
                 $latitude,
                 $longitude,
                 $rawData['weather'],
+                $rawData['sources'],
                 $type,
                 $unit
             );
@@ -73,6 +75,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
         float $latitude,
         float $longitude,
         array $weatherRawData,
+        array $sourcesRawData,
         ?string $type = null,
         string $unit = UnitConst::UNIT_METRIC
     ): WeatherDto {
@@ -159,9 +162,15 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
 
         $sunshineUnit = UnitHelper::getSunshineUnit($unit);
 
+        if ($sourcesRawData[0]['station_name'] ?? null) {
+            $extraSource = [new WeatherSourceDto($sourcesRawData[0]['station_name'])];
+        } else {
+            $extraSource = [];
+        }
+
         return new WeatherDto(
             $unit,
-            $this->getSources(),
+            array_merge($this->getSources(), $extraSource),
             $latitude,
             $longitude,
             $temperature,
@@ -184,6 +193,9 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
         );
     }
 
+    /**
+     * @return list<WeatherSourceDto>
+     */
     public function getSources(): array
     {
         return  [

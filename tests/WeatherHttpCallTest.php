@@ -24,6 +24,9 @@ final class WeatherHttpCallTest extends TestCase
 
         $weather = (new BrightskyHttpProvider())->getWeatherHistorical($weatherQuery);
 
+        // DEBUG
+        //var_dump($weather);
+
         static::assertSame(17.1, $weather->temperature);
     }
 
