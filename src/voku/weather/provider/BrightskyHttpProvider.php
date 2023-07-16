@@ -93,13 +93,25 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             }
         }
 
-        $temperature = UnitHelper::mapTemperature($weatherRawData['temperature'], UnitConst::TEMPERATURE_CELSIUS, $unit);
+        if (isset($weatherRawData['temperature'])) {
+            $temperature = UnitHelper::mapTemperature($weatherRawData['temperature'], UnitConst::TEMPERATURE_CELSIUS, $unit);
+        } else {
+            $temperature = null;
+        }
 
-        $dewPoint = UnitHelper::mapTemperature($weatherRawData['dew_point'], UnitConst::TEMPERATURE_CELSIUS, $unit);
+        if (isset($weatherRawData['dew_point'])) {
+            $dewPoint = UnitHelper::mapTemperature($weatherRawData['dew_point'], UnitConst::TEMPERATURE_CELSIUS, $unit);
+        } else {
+            $dewPoint = null;
+        }
 
         $humidity = $weatherRawData['relative_humidity'];
 
-        $pressure = UnitHelper::mapPressure($weatherRawData['pressure_msl'], UnitConst::PRESSURE_HPA, $unit);
+        if (isset($weatherRawData['pressure_msl'])) {
+            $pressure = UnitHelper::mapPressure($weatherRawData['pressure_msl'], UnitConst::PRESSURE_HPA, $unit);
+        } else {
+            $pressure = null;
+        }
 
         if (isset($weatherRawData['wind_speed'])) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed'], UnitConst::SPEED_KMH, $unit);
@@ -314,10 +326,12 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
         $dateTime = $query->dateTime ?? new \DateTimeImmutable();
         $queryArray['date'] = $dateTime->format('c');
         if ($query->lastDateTime) {
-            $queryArray['last_date'] = $query->lastDateTime;
+            $queryArray['last_date'] = $query->lastDateTime->format('c');
         } else {
             $queryArray['last_date'] = (new \DateTimeImmutable($dateTime->format('Y-m-d 23:59:59')))->format('c');
         }
+
+        var_dump($queryArray);
 
         return sprintf('https://api.brightsky.dev/weather?%s', http_build_query($queryArray));
     }
@@ -329,7 +343,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
         $dateTime = $query->dateTime ?? new \DateTimeImmutable();
         $queryArray['date'] = $dateTime->format('c');
         if ($query->lastDateTime) {
-            $queryArray['last_date'] = $query->lastDateTime;
+            $queryArray['last_date'] = $query->lastDateTime->format('c');
         } else {
             $queryArray['last_date'] = (new \DateTimeImmutable($dateTime->format('Y-m-d 23:59:59')))->format('c');
         }

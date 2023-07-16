@@ -23,7 +23,7 @@ final class WeatherDto
         public readonly array $sources,
         public readonly float $latitude,
         public readonly float $longitude,
-        public readonly float $temperature,
+        public readonly ?float $temperature,
         public readonly string $temperatureUnit,
         public readonly ?float $dewPoint,
         /**
