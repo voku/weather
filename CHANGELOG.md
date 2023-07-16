@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.5.0 (2023-07-15)
+
+- "BrightskyHttpProvider" -> fix for NULL values from the API
+
 ### 0.4.0 (2023-07-15)
 
 - "WeatherDto" -> add more units + "sunshine" info
