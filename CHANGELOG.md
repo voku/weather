@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.5.1 (2023-07-15)
+
+- "BrightskyHttpProvider" -> fix for NULL values from the API v2
+
 ### 0.5.0 (2023-07-15)
 
 - "BrightskyHttpProvider" -> fix for NULL values from the API
