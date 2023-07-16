@@ -44,8 +44,8 @@ final class WeatherHttpCallTest extends TestCase
 
         $weatherCollection = (new BrightskyHttpProvider())->getWeatherHistoricalCollection($weatherQuery);
 
-        static::assertCount(25, $weatherCollection->getAll());
-        static::assertCount(25, $weatherCollection->getHistorical());
+        static::assertCount(13, $weatherCollection->getAll());
+        static::assertCount(13, $weatherCollection->getHistorical());
 
         static::assertSame(11.5, $weatherCollection->getAll()[0]->temperature);
     }
@@ -65,8 +65,8 @@ final class WeatherHttpCallTest extends TestCase
 
         $weatherCollection = (new BrightskyHttpProvider())->getWeatherHistoricalCollection($weatherQuery);
 
-        static::assertCount(25, $weatherCollection->getAll());
-        static::assertCount(25, $weatherCollection->getHistorical());
+        static::assertCount(13, $weatherCollection->getAll());
+        static::assertCount(13, $weatherCollection->getHistorical());
 
         static::assertSame('52.7 °F', $weatherCollection->getAll()[0]->getTemperatureWithUnit());
         static::assertSame('5.59 mph', $weatherCollection->getAll()[0]->getWindSpeedWithUnit());

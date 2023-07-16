@@ -331,8 +331,6 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
             $queryArray['last_date'] = (new \DateTimeImmutable($dateTime->format('Y-m-d 23:59:59')))->format('c');
         }
 
-        var_dump($queryArray);
-
         return sprintf('https://api.brightsky.dev/weather?%s', http_build_query($queryArray));
     }
 
