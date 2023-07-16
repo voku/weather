@@ -67,6 +67,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
 
     /**
      * @param array<string, mixed> $weatherRawData
+     * @param array<int, mixed> $sourcesRawData
      *
      * @phpstan-param WeatherConst::TYPE_* $type
      * @phpstan-param UnitConst::UNIT_* $unit
@@ -100,49 +101,49 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
 
         $pressure = UnitHelper::mapPressure($weatherRawData['pressure_msl'], UnitConst::PRESSURE_HPA, $unit);
 
-        if (\array_key_exists('wind_speed', $weatherRawData)) {
+        if (isset($weatherRawData['wind_speed'])) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed'], UnitConst::SPEED_KMH, $unit);
-        } elseif (\array_key_exists('wind_speed_10', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_speed_10'])) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_10'], UnitConst::SPEED_KMH, $unit);
-        } elseif (\array_key_exists('wind_speed_30', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_speed_30'])) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_30'], UnitConst::SPEED_KMH, $unit);
-        } elseif (\array_key_exists('wind_speed_60', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_speed_60'])) {
             $windSpeed = UnitHelper::mapSpeed($weatherRawData['wind_speed_60'], UnitConst::SPEED_KMH, $unit);
         } else {
             $windSpeed = null;
         }
 
-        if (\array_key_exists('wind_direction', $weatherRawData)) {
+        if (isset($weatherRawData['wind_direction'])) {
             $windDirection = $weatherRawData['wind_direction'];
-        } elseif (\array_key_exists('wind_direction_10', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_direction_10'])) {
             $windDirection = $weatherRawData['wind_direction_10'];
-        } elseif (\array_key_exists('wind_direction_30', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_direction_30'])) {
             $windDirection = $weatherRawData['wind_direction_30'];
-        } elseif (\array_key_exists('wind_direction_60', $weatherRawData)) {
+        } elseif (isset($weatherRawData['wind_direction_60'])) {
             $windDirection = $weatherRawData['wind_direction_60'];
         } else {
             $windDirection = null;
         }
 
-        if (\array_key_exists('precipitation', $weatherRawData)) {
+        if (isset($weatherRawData['precipitation'])) {
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation'], UnitConst::PRECIPITATION_MM, $unit);
-        } elseif (\array_key_exists('precipitation_10', $weatherRawData)) {
+        } elseif (isset($weatherRawData['precipitation_10'])) {
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_10'], UnitConst::PRECIPITATION_MM, $unit);
-        } elseif (\array_key_exists('precipitation_30', $weatherRawData)) {
+        } elseif (isset($weatherRawData['precipitation_30'])) {
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_30'], UnitConst::PRECIPITATION_MM, $unit);
-        } elseif (\array_key_exists('precipitation_60', $weatherRawData)) {
+        } elseif (isset($weatherRawData['precipitation_60'])) {
             $precipitation = UnitHelper::mapPrecipitation($weatherRawData['precipitation_60'], UnitConst::PRECIPITATION_MM, $unit);
         } else {
             $precipitation = null;
         }
 
-        if (\array_key_exists('sunshine', $weatherRawData)) {
+        if (isset($weatherRawData['sunshine'])) {
             $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine'], UnitConst::SUNSHINE_MIN, $unit);
-        } elseif (\array_key_exists('sunshine_10', $weatherRawData)) {
+        } elseif (isset($weatherRawData['sunshine_10'])) {
             $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_10'], UnitConst::SUNSHINE_MIN, $unit);
-        } elseif (\array_key_exists('sunshine_30', $weatherRawData)) {
+        } elseif (isset($weatherRawData['sunshine_30'])) {
             $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_30'], UnitConst::SUNSHINE_MIN, $unit);
-        } elseif (\array_key_exists('sunshine_60', $weatherRawData)) {
+        } elseif (isset($weatherRawData['sunshine_60'])) {
             $sunshine = UnitHelper::mapSunshine((int)$weatherRawData['sunshine_60'], UnitConst::SUNSHINE_MIN, $unit);
         } else {
             $sunshine = null;
