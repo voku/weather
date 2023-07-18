@@ -19,7 +19,7 @@
   "require-dev": {
     "phpstan/phpstan": "1.10.*",
     "phpunit/phpunit": "9.6.*",
-    "php-cs-fixer/shim": "v3.21.*"
+    "php-cs-fixer/shim": "v3.22.*"
   },
   "autoload": {
     "psr-4": {
