@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2023-07-22)
+
+- "DummyProvider" -> added for testing
+- "WeatherCollection" is now countable
+- breaking-change: "ProviderInterface" add missing method `getWeatherForecast()`
+- breaking-change: "WeatherCollection" -> `add()` is now immutable
+
 ### 0.5.2 (2023-07-15)
 
 - "BrightskyHttpProvider" -> clean-up debuggging stuff + fix test cases
