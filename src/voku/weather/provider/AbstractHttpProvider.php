@@ -30,8 +30,8 @@ abstract class AbstractHttpProvider implements ProviderInterface
         ?RequestFactoryInterface $requestFactory = null
     )
     {
-        $this->client = $client ?: new \Httpful\Client();
-        $this->requestFactory = $requestFactory ?: new \Httpful\Factory();
+        $this->client = $client ?: (class_exists('\Httpful\Client') ? new \Httpful\Client() : (class_exists('\Http\Discovery\Psr18Client') ? new \Http\Discovery\Psr18Client() : throw new \Error('no PSR-18 implementation found')));
+        $this->requestFactory = $requestFactory ?: (class_exists('\Httpful\Factory') ? new \Httpful\Factory() : (class_exists('\Http\Discovery\Psr17Factory') ? new \Http\Discovery\Psr17Factory() : throw new \Error('no PSR-17 implementation found')));
     }
 
     private function forceWeatherCollection(WeatherCollection|WeatherDto $weatherData): WeatherCollection

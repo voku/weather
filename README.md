@@ -16,6 +16,7 @@ This is a simple wrapper around the "Bright Sky" (https://brightsky.dev/) weathe
 ### Install via "composer require"
 ```shell
 composer require voku/weather
+composer require voku/httpful # or another php-http/client-implementation e.g. "php-http/react-adapter" + "nyholm/psr7"
 ```
 
 ### Usage:

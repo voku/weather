@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.0 (2023-07-22)
+
+- breaking-change: allow to use any "php-http/client-implementation"
+
 ### 0.6.0 (2023-07-22)
 
 - "DummyProvider" -> added for testing
