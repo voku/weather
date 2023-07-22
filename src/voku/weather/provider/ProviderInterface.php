@@ -13,6 +13,8 @@ interface ProviderInterface
 {
     public function getWeatherCurrent(WeatherQueryDto $query): WeatherDto;
 
+    public function getWeatherForecast(WeatherQueryDto $query): WeatherDto;
+
     public function getWeatherForecastCollection(WeatherQueryDto $query): WeatherCollection;
 
     /**

@@ -40,7 +40,7 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
         if ($type !== WeatherConst::TYPE_CURRENT) {
             $weatherCollection = new WeatherCollection();
             foreach ($rawData['weather'] as $weatherRawData) {
-                $weatherCollection->add(
+                $weatherCollection = $weatherCollection->add(
                     $this->mapItemRawData(
                         $latitude,
                         $longitude,

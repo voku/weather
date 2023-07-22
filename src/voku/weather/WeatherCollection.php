@@ -6,7 +6,7 @@ namespace voku\weather;
 
 use voku\weather\constants\WeatherConst;
 
-final class WeatherCollection
+final class WeatherCollection implements \Countable
 {
     private ?WeatherDto $current = null;
 
@@ -20,23 +20,29 @@ final class WeatherCollection
      */
     private array $forecast = [];
 
+    /**
+     * @return self
+     *               <p>(Immutable) Returns a new collection.</p>
+     */
     public function add(WeatherDto $weather): self
     {
+        $that = clone $this;
+
         if ($weather->type === WeatherConst::TYPE_CURRENT) {
-            $this->current = $weather;
+            $that->current = $weather;
         }
 
         if ($weather->type === WeatherConst::TYPE_HISTORICAL) {
-            $this->historical[] = $weather;
-            usort($this->historical, [$this, 'sortByDate']);
+            $that->historical[] = $weather;
+            usort($that->historical, [$that, 'sortByDate']);
         }
 
         if ($weather->type === WeatherConst::TYPE_FORECAST) {
-            $this->forecast[] = $weather;
-            usort($this->forecast, [$this, 'sortByDate']);
+            $that->forecast[] = $weather;
+            usort($that->forecast, [$that, 'sortByDate']);
         }
 
-        return $this;
+        return $that;
     }
 
     public function getClosest(\DateTimeInterface $dateTime): ?WeatherDto
@@ -95,6 +101,11 @@ final class WeatherCollection
         $weatherArray += $this->forecast;
 
         return $weatherArray;
+    }
+
+    public function count(): int
+    {
+        return count($this->getAll());
     }
 
     private function sortByDate(WeatherDto $a, WeatherDto $b): int

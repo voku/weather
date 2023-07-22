@@ -37,10 +37,7 @@ abstract class AbstractHttpProvider implements ProviderInterface
     private function forceWeatherCollection(WeatherCollection|WeatherDto $weatherData): WeatherCollection
     {
         if ($weatherData instanceof WeatherDto) {
-            $weatherCollection = new WeatherCollection();
-            $weatherCollection->add($weatherData);
-
-            return $weatherCollection;
+            return (new WeatherCollection())->add($weatherData);
         }
 
         return $weatherData;
