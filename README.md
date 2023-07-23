@@ -9,7 +9,7 @@
 This is a simple wrapper around the "Bright Sky" (https://brightsky.dev/) weather api.
 + you can simply replace the weather api by implementing another weather provider class.
 
-### DEMO:
+### DEMO: (https://github.com/voku/weather-demo)
 [http://weather-demo.suckup.de/](http://weather-demo.suckup.de/)
 
 
