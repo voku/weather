@@ -14,6 +14,8 @@ final class UnitHelper
 
     private const ONE_MS_IN_KMH = 3.6;
 
+    private const ONE_MM_IN_INCH = 25.4;
+
     /**
      * @phpstan-param UnitConst::UNIT_* $unit
      *
@@ -246,10 +248,10 @@ final class UnitHelper
         return match ($from) {
             UnitConst::PRECIPITAION_INCHES => match ($unit) {
                 UnitConst::UNIT_IMPERIAL => $precipitation,
-                default                  => $precipitation * 25.4,
+                default                  => $precipitation * self::ONE_MM_IN_INCH,
             },
             default => match ($unit) {
-                UnitConst::UNIT_IMPERIAL => round($precipitation / 25.4, 2),
+                UnitConst::UNIT_IMPERIAL => round($precipitation / self::ONE_MM_IN_INCH, 2),
                 default                  => $precipitation,
             },
         };
