@@ -5,23 +5,24 @@
 
 # Weather Data Wrapper
 
-This is a simple wrapper around the "Bright Sky" (https://brightsky.dev/) weather api.
-+ you can simply replace the weather api by implementing another weather provider class.
+This is a simple wrapper around the [Bright Sky](https://brightsky.dev/) weather API.
 
-### DEMO:
-[http://weather-demo.suckup.de/](http://weather-demo.suckup.de/)
+You can simply replace the weather API by implementing another weather provider class.
 
+### Demo
 
-### Install via "composer require"
+[weather-demo.suckup.de](https://weather-demo.suckup.de/)
+
+### Install with Composer
+
 ```shell
 composer require voku/weather
 composer require voku/httpful # or another php-http/client-implementation e.g. "php-http/discovery" + "php-http/react-adapter" + "nyholm/psr7"
 ```
 
-### Usage:
+### Usage
 
 ```php
-
 use voku\weather\provider\BrightskyHttpProvider;
 use voku\weather\WeatherQueryDto;
 
@@ -42,30 +43,29 @@ $weather = (new BrightskyHttpProvider())->getWeatherHistorical($weatherQuery);
 echo $weather->temperature; // 17.1
 ```
 
-Example 1: (temperature with unit)
+Example 1: temperature with unit
 
 ```php
 echo $weather->getTemperatureWithUnit(); // 17.1 °C
 ```
 
-Example 2: (wind-speed with unit)
+Example 2: wind-speed with unit
 
 ```php
 echo $weather->getWindSpeedWithUnit(); // 9 km/h
 ```
 
-
-### Unit Test:
+### Unit Tests
 
 1) [Composer](https://getcomposer.org) is a prerequisite for running the tests.
 
-```
+```shell
 composer install
 ```
 
-2) The tests can be executed by running this command from the root directory:
+2) The tests can be executed by running this command from the root directory.
 
-```bash
+```shell
 ./vendor/bin/phpunit
 ```
 
