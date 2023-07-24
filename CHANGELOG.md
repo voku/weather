@@ -17,7 +17,7 @@
 
 ### 0.5.2 (2023-07-15)
 
-- "BrightskyHttpProvider" -> clean-up debuggging stuff + fix test cases
+- "BrightskyHttpProvider" -> clean-up debugging stuff + fix test cases
 
 ### 0.5.1 (2023-07-15)
 
