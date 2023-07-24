@@ -48,9 +48,11 @@ final class BrightskyHttpProvider extends AbstractHttpProvider
                         $rawData['sources'],
                         null,
                         $unit
-                    )
+                    ),
+                    false
                 );
             }
+            $weatherCollection = $weatherCollection->sortWeatherData();
         } else {
             return $this->mapItemRawData(
                 $latitude,

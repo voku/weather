@@ -24,7 +24,7 @@ final class WeatherCollection implements \Countable
      * @return self
      *               <p>(Immutable) Returns a new collection.</p>
      */
-    public function add(WeatherDto $weather): self
+    public function add(WeatherDto $weather, bool $forceSort = true): self
     {
         $that = clone $this;
 
@@ -34,13 +34,30 @@ final class WeatherCollection implements \Countable
 
         if ($weather->type === WeatherConst::TYPE_HISTORICAL) {
             $that->historical[] = $weather;
-            usort($that->historical, [$that, 'sortByDate']);
+            if ($forceSort) {
+                usort($that->historical, [$that, 'sortByDate']);
+            }
         }
 
         if ($weather->type === WeatherConst::TYPE_FORECAST) {
             $that->forecast[] = $weather;
-            usort($that->forecast, [$that, 'sortByDate']);
+            if ($forceSort) {
+                usort($that->forecast, [$that, 'sortByDate']);
+            }
         }
+
+        return $that;
+    }
+
+    /**
+     * @return self
+     *               <p>(Immutable) Returns a new collection.</p>
+     */
+    public function sortWeatherData(): self {
+        $that = clone $this;
+
+        usort($that->historical, [$that, 'sortByDate']);
+        usort($that->forecast, [$that, 'sortByDate']);
 
         return $that;
     }

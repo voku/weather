@@ -38,16 +38,16 @@ final class WeatherHttpCallTest extends TestCase
         $weatherQuery = new WeatherQueryDto(
             $latitude,
             $longitude,
-            new \DateTimeImmutable('2023-01-01 00:00:00'),
+            new \DateTimeImmutable('2022-01-01 00:00:00'),
             new \DateTimeImmutable('2023-01-01 12:00:00')
         );
 
         $weatherCollection = (new BrightskyHttpProvider())->getWeatherHistoricalCollection($weatherQuery);
 
-        static::assertCount(13, $weatherCollection->getAll());
-        static::assertCount(13, $weatherCollection->getHistorical());
+        static::assertCount(8773, $weatherCollection->getAll());
+        static::assertCount(8773, $weatherCollection->getHistorical());
 
-        static::assertSame(11.5, $weatherCollection->getAll()[0]->temperature);
+        static::assertSame(10.5, $weatherCollection->getAll()[0]->temperature);
     }
 
     public function testGetWeatherHistoricalCollectionImperialUnits(): void
