@@ -20,7 +20,7 @@
   "require-dev": {
     "phpstan/phpstan": "1.10.*",
     "phpunit/phpunit": "9.6.*",
-    "php-cs-fixer/shim": "v3.23.*",
+    "php-cs-fixer/shim": "v3.27.*",
     "voku/httpful": "3.0.*"
   },
   "autoload": {
