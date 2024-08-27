@@ -18,7 +18,7 @@
     "psr/http-factory-implementation": "*"
   },
   "require-dev": {
-    "phpstan/phpstan": "1.10.*",
+    "phpstan/phpstan": "1.12.*",
     "phpunit/phpunit": "9.6.*",
     "php-cs-fixer/shim": "v3.27.*",
     "voku/httpful": "3.0.*"
