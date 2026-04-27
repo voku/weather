@@ -26,12 +26,43 @@ abstract class AbstractHttpProvider implements ProviderInterface
     private RequestFactoryInterface $requestFactory;
 
     public function __construct(
-        ?ClientInterface         $client = null,
+        ?ClientInterface $client = null,
         ?RequestFactoryInterface $requestFactory = null
-    )
+    ) {
+        $this->client = $client ?? $this->createClient();
+        $this->requestFactory = $requestFactory ?? $this->createRequestFactory();
+    }
+
+    private function createClient(): ClientInterface
     {
-        $this->client = $client ?: (class_exists('\Httpful\Client') ? new \Httpful\Client() : (class_exists('\Http\Discovery\Psr18Client') ? new \Http\Discovery\Psr18Client() : throw new \Error('no PSR-18 implementation found')));
-        $this->requestFactory = $requestFactory ?: (class_exists('\Httpful\Factory') ? new \Httpful\Factory() : (class_exists('\Http\Discovery\Psr17Factory') ? new \Http\Discovery\Psr17Factory() : throw new \Error('no PSR-17 implementation found')));
+        if (class_exists('\Httpful\Client')) {
+            return new \Httpful\Client();
+        }
+
+        if (class_exists('\Http\Discovery\Psr18Client')) {
+            $client = new \Http\Discovery\Psr18Client();
+            if ($client instanceof ClientInterface) {
+                return $client;
+            }
+        }
+
+        throw new \Error('no PSR-18 implementation found');
+    }
+
+    private function createRequestFactory(): RequestFactoryInterface
+    {
+        if (class_exists('\Httpful\Factory')) {
+            return new \Httpful\Factory();
+        }
+
+        if (class_exists('\Http\Discovery\Psr17Factory')) {
+            $requestFactory = new \Http\Discovery\Psr17Factory();
+            if ($requestFactory instanceof RequestFactoryInterface) {
+                return $requestFactory;
+            }
+        }
+
+        throw new \Error('no PSR-17 implementation found');
     }
 
     private function forceWeatherCollection(WeatherCollection|WeatherDto $weatherData): WeatherCollection
@@ -44,11 +75,11 @@ abstract class AbstractHttpProvider implements ProviderInterface
     }
 
     /**
-     * @return array<array-key,mixed>
      * @throws WeatherException
      * @throws ClientException
-     *
      * @throws ServerException
+     *
+     * @return array<array-key,mixed>
      */
     private function getRawResponse(string $url): array
     {
@@ -80,7 +111,7 @@ abstract class AbstractHttpProvider implements ProviderInterface
         }
 
         $statusCode = $response->getStatusCode();
-        $body = (string)$response->getBody();
+        $body = (string) $response->getBody();
 
         if ($statusCode >= 400 && $statusCode < 500) {
             throw new ClientException($body . ' | ' . $request->getUri(), $statusCode);
@@ -100,9 +131,9 @@ abstract class AbstractHttpProvider implements ProviderInterface
      * @phpstan-param UnitConst::UNIT_*    $unit
      */
     abstract protected function mapRawData(
-        float  $latitude,
-        float  $longitude,
-        array  $rawData,
+        float $latitude,
+        float $longitude,
+        array $rawData,
         string $type,
         string $unit
     ): WeatherDto|WeatherCollection;
