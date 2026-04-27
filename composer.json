@@ -21,7 +21,7 @@
     "phpstan/phpstan": "2.1.*",
     "phpunit/phpunit": "9.6.*",
     "php-cs-fixer/shim": "v3.95.*",
-    "voku/httpful": "3.0.*"
+    "voku/httpful": "3.1.*"
   },
   "autoload": {
     "psr-4": {
