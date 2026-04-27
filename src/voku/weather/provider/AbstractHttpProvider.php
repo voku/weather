@@ -44,6 +44,8 @@ abstract class AbstractHttpProvider implements ProviderInterface
             if ($client instanceof ClientInterface) {
                 return $client;
             }
+
+            throw new \Error('\Http\Discovery\Psr18Client must implement Psr\Http\Client\ClientInterface');
         }
 
         throw new \Error('no PSR-18 implementation found');
@@ -60,6 +62,8 @@ abstract class AbstractHttpProvider implements ProviderInterface
             if ($requestFactory instanceof RequestFactoryInterface) {
                 return $requestFactory;
             }
+
+            throw new \Error('\Http\Discovery\Psr17Factory must implement Psr\Http\Message\RequestFactoryInterface');
         }
 
         throw new \Error('no PSR-17 implementation found');
